@@ -1,6 +1,6 @@
 class Offer:
     def __init__(self, title=None, company=None, working_place=None, requirements=None, salary=None,
-                 link_to_offer=None):
+                 link_to_offer=None, seniority=None):
         """
         :rtype: object
         :type title: str
@@ -9,6 +9,7 @@ class Offer:
         :type requirements: list
         :type salary: str
         :type link_to_offer: str
+        :type seniority: str
         """
         self.title = title
         self.company = company
@@ -16,3 +17,4 @@ class Offer:
         self.requirements = requirements
         self.salary = salary
         self.link_to_offer = link_to_offer
+        self.seniority = seniority
