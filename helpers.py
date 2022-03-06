@@ -36,14 +36,15 @@ def get_next_page(soup_response, host):
         return
 
 
-def get_offers_links(starting_page_url: str, host: str) -> str:
+def get_offers_links(starting_page_url: str) -> str:
     if starting_page_url is not None:
-        host = host
+        host = starting_page_url.split(sep='/pl')[0]
         response = requests.get(starting_page_url)
         bs_response = BeautifulSoup(response.content, 'html.parser')
-
-        for job_offer in bs_response.findAll('a', class_='posting-list-item'):
+        links_counter = 1
+        job_offers = bs_response.findAll('a', class_='posting-list-item')
+        for job_offer in job_offers:
+            print(f'#{links_counter} of {len(job_offers)}')
+            links_counter += 1
             yield host + job_offer['href']
-        get_offers_links(get_next_page(bs_response, host), host)
-
-
+        get_offers_links(get_next_page(bs_response, host))
